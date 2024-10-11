@@ -1,0 +1,17 @@
+- name: Create parameter in AWS Parameter Store
+  hosts:  localhost
+  gather_facts: false
+
+  tasks:
+    - name: Create parameter in AWS Parameter Store 
+      community.aws.aws_ssm_parameter_store:
+        aws_region: "us-east-1"
+        name: "{{ parameter_name }}"
+        value: "{{ parameter_value }}"
+        type: "{{ parameter_type }}"
+        overwrite_value: always
+      register: result
+    
+    - name: Result print
+      debug:
+        var: result
